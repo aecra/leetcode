@@ -195,6 +195,42 @@ func TestRemoveKdigits(t *testing.T) {
 	}
 }
 
+// 430. Flatten a Multilevel Doubly Linked List
+// 430. 展开多级双向链表
+func TestFlatten430(t *testing.T) {
+	// test case 1
+	// 1 - 2 - 3
+	//     |
+	//     4 - 5 - 6
+	//         |
+	//         7
+	node1 := &Node{Val: 1}
+	node2 := &Node{Val: 2}
+	node3 := &Node{Val: 3}
+	node4 := &Node{Val: 4}
+	node5 := &Node{Val: 5}
+	node6 := &Node{Val: 6}
+	node7 := &Node{Val: 7}
+	node1.Next = node2
+	node2.Next = node3
+	node2.Prev = node1
+	node3.Prev = node2
+	node2.Child = node4
+	node4.Next = node5
+	node5.Prev = node4
+	node5.Next = node6
+	node6.Prev = node5
+	node5.Child = node7
+	got := flatten430(node1)
+	resArrary := []int{1, 2, 4, 5, 7, 6, 3}
+	for i := 1; i <= 7; i++ {
+		if got.Val != resArrary[i-1] {
+			t.Errorf("flatten() error.")
+		}
+		got = got.Next
+	}
+}
+
 // 557. Reverse Words in a String III
 // 557. 反转字符串中的单词 III
 func TestReverseWords(t *testing.T) {
@@ -362,6 +398,41 @@ func TestGetKthFromEnd(t *testing.T) {
 	}
 	if reflect.DeepEqual(res, []int{4, 5}) == false {
 		t.Errorf("getKthFromEnd() error.")
+	}
+}
+
+// 剑指 Offer 28. 展开多级双向链表
+func TestFlatten(t *testing.T) {
+	// test case 1
+	// 1 - 2 - 3
+	//     |
+	//     4 - 5 - 6
+	//         |
+	//         7
+	node1 := &Node{Val: 1}
+	node2 := &Node{Val: 2}
+	node3 := &Node{Val: 3}
+	node4 := &Node{Val: 4}
+	node5 := &Node{Val: 5}
+	node6 := &Node{Val: 6}
+	node7 := &Node{Val: 7}
+	node1.Next = node2
+	node2.Next = node3
+	node2.Prev = node1
+	node3.Prev = node2
+	node2.Child = node4
+	node4.Next = node5
+	node5.Prev = node4
+	node5.Next = node6
+	node6.Prev = node5
+	node5.Child = node7
+	got := flatten(node1)
+	resArrary := []int{1, 2, 4, 5, 7, 6, 3}
+	for i := 1; i <= 7; i++ {
+		if got.Val != resArrary[i-1] {
+			t.Errorf("flatten() error.")
+		}
+		got = got.Next
 	}
 }
 
